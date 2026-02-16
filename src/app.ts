@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   console.log(req.query);
-  return res.send('home');
+  return res.send('Hello World');
 });
 
 app.get('/users', (req, res) => {
