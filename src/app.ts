@@ -11,12 +11,9 @@ app.get('/', (req, res) => {
   return res.send('Hello World');
 });
 
-app.get('/users', (req, res) => {
-  return res.send('hola mundo');
-});
-
 const apiRouter = Router();
-apiRouter.use('./api', apiRouter);
+
+app.use('/api', apiRouter);
 
 const userRouter = new UserRouter();
 apiRouter.use(userRouter.router);
