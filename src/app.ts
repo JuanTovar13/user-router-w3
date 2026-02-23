@@ -1,10 +1,10 @@
 import express, { Router } from 'express';
 import { NODE_ENV, PORT } from './config';
-import { UserRouter } from './features/users/user.router';
 import cors from 'cors';
-import { UserController } from './features/users/user.controller';
 import { errorsMiddleware } from './middlewares/errorsMiddleware';
-import { UserService } from './features/users/user.service';
+import { PostController } from './features/posts/post.controller';
+import { PostRouter } from './features/posts/post.router';
+import { PostService } from './features/posts/post.service';
 
 const app = express();
 
@@ -20,12 +20,12 @@ const apiRouter = Router();
 
 app.use('/api', apiRouter);
 
-const userService = new UserService();
+const postService = new PostService();
 
-const userController = new UserController(userService);
+const postController = new PostController(postService);
 
-const userRouter = new UserRouter(userController);
-apiRouter.use(userRouter.router);
+const postRouter = new PostRouter(postController);
+apiRouter.use(postRouter.router);
 
 app.use(errorsMiddleware);
 
