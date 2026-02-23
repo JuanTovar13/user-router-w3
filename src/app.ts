@@ -4,12 +4,12 @@ import { UserRouter } from './features/users/user.router';
 import cors from 'cors';
 import { UserController } from './features/users/user.controller';
 import { errorsMiddleware } from './middlewares/errorsMiddleware';
+import { UserService } from './features/users/user.service';
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
 
 app.get('/', (req, res) => {
   console.log(req.query);
@@ -20,7 +20,9 @@ const apiRouter = Router();
 
 app.use('/api', apiRouter);
 
-const userController = new UserController();
+const userService = new UserService();
+
+const userController = new UserController(userService);
 
 const userRouter = new UserRouter(userController);
 apiRouter.use(userRouter.router);
